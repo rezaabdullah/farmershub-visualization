@@ -15,6 +15,7 @@
     display: -webkit-flex;
     display: flex;
     flex-direction: column;
+    width: 100vw;
 }
 
 .container-body {
@@ -46,6 +47,10 @@
     /* background: #D8F3DC; */
     column-gap: 16px;
     height: 18vh;
+
+    @media only screen and (min-device-width: 480px) {
+        flex-direction: column;
+    }
 }
 
 .container-card {
@@ -84,4 +89,34 @@
     align-items: center;
     background: #34A0A4;
     color: #FFFF3F;
+}
+
+@media screen and (max-width: 480px) {
+    .container-body {
+        flex-direction: column;
+    }
+
+    .container-body--filter {
+        display: none;
+    }
+
+    .container-body--card {
+        flex-direction: column;
+        row-gap: 8px;
+    }
+
+    .container-chart {
+        /* margin-top: 8px; */
+        gap: 0 0;
+    }
+
+    .container-chart--row {
+        margin-top: 8px;
+        flex-direction: column;
+        row-gap: 8px;
+    }
+
+    .container-graph {
+        width: 100%;
+    }
 }
