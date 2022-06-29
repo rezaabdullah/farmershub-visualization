@@ -13,7 +13,9 @@ import plotly.graph_objects as go
 
 app = Dash(__name__)
 
-df = pd.read_csv("main_df.csv")
+df = pd.read_csv("clean_df.csv", dtype={"person_id":str, "person_name":str,
+    "person_mobile":str, "person_gender":str}, parse_dates=["transaction_date", 
+    "dropout_at"])
 
 # get indicator
 def get_indicator():
@@ -101,11 +103,28 @@ def get_indicator():
 
 #     return fig
 
+def get_revenue():
+    df_time = df.groupby(["transaction_date"]).agg(revenue_usd=("revenue_usd", "sum")).reset_index()
+    fig = px.line(df_time, x="transaction_date", y="revenue_usd")
+    fig.update_layout(
+        margin=dict(l=0, r=10, t=20, b=0)
+    )
+    return fig
 
-fig = px.line(df, x="transaction_date", y="revenue_usd")
-fig.update_layout(
-    margin=dict(l=0, r=10, t=20, b=0)
-)
+def get_geomap():
+    df_geomap = df.groupby("country_name").agg(revenue_usd=("revenue_usd", "sum"),
+            transaction_count=("user_id", pd.Series.nunique),
+            user_count=("user_id", pd.Series.nunique)).reset_index()
+    iso_map = {"Bangladesh": "BGD", "Indonesia": "IDN", "Kenya": "KEN", "Mali": "MLI",
+        "Nigeria": "NGA", "Senegal": "SEN"}
+    df_geomap["iso_alpha"] = df_geomap["country_name"].map(iso_map)
+    
+
+    fig = px.choropleth(df_geomap, locations="iso_alpha", color="user_count",
+        hover_name="country_name", color_continuous_scale=px.colors.sequential.RdPu)
+    fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
+
+    return fig
 
 app.layout = html.Div(
     className="container",
@@ -163,12 +182,21 @@ app.layout = html.Div(
                                             dcc.Graph(
                                                 id="Graph_1",
                                                 # responsive=True,
-                                                figure=fig,
+                                                figure=get_revenue(),
                                                 style={'width': "100%", 'height': "100%", 'display': 'inline-block'}
                                             ),
                                             className="container-graph"
                                         ),
-                                        html.Div("Graph_2", className="container-graph")
+                                        # html.Div("Graph_2", className="container-graph")
+                                        html.Div(
+                                            dcc.Graph(
+                                                id="Graph_2",
+                                                # responsive=True,
+                                                figure=get_geomap(),
+                                                style={'width': "100%", 'height': "100%", 'display': 'inline-block'}
+                                            ),
+                                            className="container-graph"
+                                        )
                                     ]
                                 ),
                                 html.Div(
