@@ -33,12 +33,12 @@ app.layout = html.Div(
                         html.Div(
                             className="container-body--card",
                             children=[
-                                html.Div("Metric_1", className="container-card"),
-                                html.Div("Metric_1", className="container-card"),
-                                html.Div("Metric_1", className="container-card"),
-                                html.Div("Metric_1", className="container-card"),
-                                html.Div("Metric_1", className="container-card"),
-                                html.Div("Metric_1", className="container-card"),                                
+                                html.Div("Card_1", className="container-card"),
+                                html.Div("Card_2", className="container-card"),
+                                html.Div("Card_3", className="container-card"),
+                                html.Div("Card_4", className="container-card"),
+                                html.Div("Card_5", className="container-card"),
+                                html.Div("Card_6", className="container-card"),                                
                             ]
                         ),
                         html.Div(
