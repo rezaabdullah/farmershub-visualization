@@ -6,9 +6,35 @@
 # #f9f4ee
 
 from dash import Dash, html, dcc
+import pandas as pd
+import plotly.express as px
+import plotly.graph_objects as go
 # import dash_bootstrap_components as dbc
 
 app = Dash(__name__)
+
+df = pd.read_csv("main_df.csv")
+
+# get indicator
+def get_indicator():
+    fig = go.Figure(go.Indicator(
+        mode = "number",
+        value = df["user_id"].nunique(),
+        title = {"text": "#Farmers Hub", "font":{"size":20}},
+        number={"font":{"size":20}})
+    )
+    fig.update_layout(
+        margin=dict(l=0, r=0, t=0, b=0),
+        width=200,
+        height=100)
+
+    return fig
+
+
+fig = px.line(df, x="transaction_date", y="revenue_usd")
+fig.update_layout(
+    margin=dict(l=0, r=10, t=20, b=0)
+)
 
 app.layout = html.Div(
     className="container",
@@ -30,12 +56,13 @@ app.layout = html.Div(
                         html.Div(
                             className="container-body--card",
                             children=[
-                                html.Div("Metric_1", className="container-card"),
-                                html.Div("Metric_2", className="container-card"),
-                                html.Div("Metric_3", className="container-card"),
-                                html.Div("Metric_4", className="container-card"),
-                                html.Div("Metric_5", className="container-card"),
-                                html.Div("Metric_6", className="container-card")
+                                # html.Div("Metric_1", className="container-card"),
+                                html.Div(dcc.Graph(figure=get_indicator(), style={'width': "100%", 'height': "100%", 'display': 'inline-block'}), className="container-card"),
+                                html.Div(dcc.Graph(figure=get_indicator(), style={'width': "100%", 'height': "100%", 'display': 'inline-block'}), className="container-card"),
+                                html.Div(dcc.Graph(figure=get_indicator(), style={'width': "100%", 'height': "100%", 'display': 'inline-block'}), className="container-card"),
+                                html.Div(dcc.Graph(figure=get_indicator(), style={'width': "100%", 'height': "100%", 'display': 'inline-block'}), className="container-card"),
+                                html.Div(dcc.Graph(figure=get_indicator(), style={'width': "100%", 'height': "100%", 'display': 'inline-block'}), className="container-card"),
+                                html.Div(dcc.Graph(figure=get_indicator(), style={'width': "100%", 'height': "100%", 'display': 'inline-block'}), className="container-card"),
                             ]
                         ),
                         html.Div(
@@ -44,7 +71,16 @@ app.layout = html.Div(
                                 html.Div(
                                     className="container-chart--row",
                                     children=[
-                                        html.Div("Graph_1", className="container-graph"),
+                                        # html.Div("Graph_1", className="container-graph"),
+                                        html.Div(
+                                            dcc.Graph(
+                                                id="Graph_1",
+                                                # responsive=True,
+                                                figure=fig,
+                                                style={'width': "100%", 'height': "100%", 'display': 'inline-block'}
+                                            ),
+                                            className="container-graph"
+                                        ),
                                         html.Div("Graph_2", className="container-graph")
                                     ]
                                 ),
