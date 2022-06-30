@@ -29,20 +29,32 @@ app.layout = dbc.Container([
                 className="bg-primary"),
         dbc.Col([
             dbc.Row([
-                dbc.Col(html.P("CARD_1", className="text-center text-info mb-4"), width=2, className="border border-success"),
-                dbc.Col(html.P("CARD_2", className="text-center text-info mb-4"), width=2, className="border border-success"),
-                dbc.Col(html.P("CARD_3", className="text-center text-info mb-4"), width=2, className="border border-success"),
-                dbc.Col(html.P("CARD_4", className="text-center text-info mb-4"), width=2, className="border border-success"),
-                dbc.Col(html.P("CARD_5", className="text-center text-info mb-4"), width=2, className="border border-success"),
-                dbc.Col(html.P("CARD_6", className="text-center text-info mb-4"), width=2, className="border border-success")
+                dbc.Col(html.P("CARD_1", className="text-center text-info mb-4"),
+                    width=2, className="border border-success"),
+                dbc.Col(html.P("CARD_2", className="text-center text-info mb-4"),
+                    width=2, className="border border-success"),
+                dbc.Col(html.P("CARD_3", className="text-center text-info mb-4"),
+                    width=2, className="border border-success"),
+                dbc.Col(html.P("CARD_4", className="text-center text-info mb-4"),
+                    width=2, className="border border-success"),
+                dbc.Col(html.P("CARD_5", className="text-center text-info mb-4"),
+                    width=2, className="border border-success"),
+                dbc.Col(html.P("CARD_6", className="text-center text-info mb-4"),
+                    width=2, className="border border-success")
                 ]),
             dbc.Row([
-                dbc.Col(html.P("CHART_1", className="text-center text-info mb-4"), width=6, className="border border-success"),
-                dbc.Col(html.P("CHART_2", className="text-center text-info mb-4"), width=6, className="border border-success"),
+                dbc.Col(html.P("CHART_1", className="text-center text-info mb-4"),
+                    width=6, className="border border-success"),
+                dbc.Col(html.P("CHART_2", className="text-center text-info mb-4"),
+                    width=6, className="border border-success"),
             ]),
             dbc.Row([
-                dbc.Col(html.P("CHART_3", className="text-center text-info mb-4"), width=6, className="border border-success"),
-                dbc.Col(html.P("CHART_4", className="text-center text-info mb-4"), width=6, className="border border-success"),
+                dbc.Col(html.P("CHART_3", className="text-center text-info mb-4"),
+                    width=6, className="border border-success"),
+                dbc.Col(html.P("CHART_4", className="text-center text-info mb-4"),
+                    width=6, className="border border-success")
+                    # width={"size":5, "offset":1, "order":1}, 
+                    # className="border border-success")
             ])
         ], width=10, className="bg-primary")
     ])
