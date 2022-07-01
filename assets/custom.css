@@ -2,3 +2,11 @@
     width: 100vw;
     position: relative;
 }
+
+.card-number {
+  height: 15vh;
+}
+
+@media screen and (max-width: 480px) {
+
+}
